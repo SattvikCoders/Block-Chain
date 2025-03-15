@@ -1,11 +1,134 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SportsTech - Empowering Athletes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-    
+<body class="light-mode">
+    <nav class="navbar">
+        <div class="logo"><span>Athlete</span>Chain</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#profiles">Profiles</a></li>
+            <li><a href="#contracts">Contracts</a></li>
+            <li><a href="#nft">NFTs</a></li>
+            <li><a href="#analytics">Analytics</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#login">Login/Signup</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="home-section">
+        <div class="home-content-left">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1 data-aos="fade-up" data-aos-duration="1200">Decentralized Sports with <span>Blockchain Power</span></h1>
+                <p data-aos="fade-up" data-aos-duration="1200">Secure, Transparent, and Fair Athlete Management.</p>
+                <div class="hero-buttons">
+                    <a href="#signup" class="btn">Get Started</a>
+                    <a href="#profiles" class="btn secondary">Explore Profiles</a>
+                    <a href="#contracts" class="btn tertiary">Smart Contracts</a>
+                </div>
+            </div>
+        </div>
+        <div class="home-content-right">
+            <div class="charts-container">
+                <div class="chart-box" data-aos="fade-right" data-aos-duration="1000">
+                    <h3>Athlete Growth</h3>
+                    <canvas id="growthBarChart" width="250" height="200"></canvas>
+                </div>
+                <div class="chart-box" data-aos="fade-left" data-aos-duration="1000">
+                    <h3>Contract Distribution</h3>
+                    <canvas id="contractPieChart" width="250" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="section">
+        <div class="container">
+            <h2 data-aos="fade-down" data-aos-duration="1000">About SportsChain</h2>
+            <p data-aos="fade-up" data-aos-duration="1000">SportsChain uses blockchain to create a secure, transparent, and decentralized ecosystem for athletes, clubs, and fans. We ensure data integrity, smart contract automation, and fair transactions.</p>
+        </div>
+    </section>
+
+    <section id="profiles" class="section">
+        <div class="container">
+            <h2 data-aos="fade-down" data-aos-duration="1000">Athlete Profiles (NFTs)</h2>
+            <div class="profile-grid">
+                </div>
+        </div>
+    </section>
+
+    <section id="contracts" class="section">
+        <div class="container">
+            <h2 data-aos="fade-down" data-aos-duration="1000">Smart Contracts & Agreements</h2>
+            <div class="contract-content">
+                <p data-aos="fade-up" data-aos-duration="1000">Automate contracts, ensure fair payments, and eliminate middlemen with blockchain-based smart contracts.</p>
+                <img src="assets/smartcontracts.png" alt="Smart Contracts" data-aos="fade-left" data-aos-duration="1000">
+            </div>
+        </div>
+    </section>
+
+    <section id="nft" class="section">
+        <div class="container">
+            <h2 data-aos="fade-down" data-aos-duration="1000">NFT Achievements & Collectibles</h2>
+            <div class="nft-content">
+                <p data-aos="fade-up" data-aos-duration="1000">Tokenize athlete achievements and create unique digital collectibles with NFTs.</p>
+                <img src="assets/nft.png" alt="NFT Collection" data-aos="fade-right" data-aos-duration="1000">
+            </div>
+        </div>
+    </section>
+
+    <section id="analytics" class="section">
+        <div class="container">
+            <h2 data-aos="fade-down" data-aos-duration="1000">Performance Analytics</h2>
+            <div class="analytics-grid">
+                <div class="chart-box" data-aos="fade-right" data-aos-duration="1000">
+                    <h3>Athlete Performance</h3>
+                    <canvas id="performanceBarChart"></canvas>
+                </div>
+                <div class="chart-box" data-aos="fade-left" data-aos-duration="1000">
+                    <h3>Training Metrics</h3>
+                    <canvas id="trainingPieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="contact-info">
+                <p>Contact Us: <a href="mailto:support@sportchain.com">support@sportchain.com</a> | +1 123 456 7890</p>
+                <div class="community-links">
+                    <a href="#" class="community-link"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="community-link"><i class="fab fa-telegram-plane"></i></a>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 1000,
+        });
+    </script>
 </body>
 </html>
