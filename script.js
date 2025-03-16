@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', function() {
 
 
@@ -99,11 +97,16 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
     
     const profileGrid = document.querySelector(".profile-grid");
+    if (!profileGrid) {
+        console.error("Profile grid element not found");
+        return;
+    }
+
     athleteProfiles.forEach(athlete => {
-        const profileCard = document.createElement("div");clear
+        const profileCard = document.createElement("div");
         profileCard.classList.add("profile-card");
         profileCard.innerHTML = `
-            <img src="${athlete.image}" alt="${athlete.name}" >
+            <img src="${athlete.image}" alt="${athlete.name}">
             <h3>${athlete.name}</h3>
             <p>Sport: ${athlete.sport}</p>
             <p>NFT ID: ${athlete.nftId}</p>
