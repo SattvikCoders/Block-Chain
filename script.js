@@ -59,6 +59,25 @@ document.addEventListener('DOMContentLoaded', function() {
         type: 'bar',
         data: growthData,
         options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Athlete Growth Over Time',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    },
+                    color: '#333',
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true
@@ -69,13 +88,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
     new Chart(document.getElementById('contractPieChart'), {
         type: 'pie',
-        data: contractData
+        data: contractData,
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Contract Distribution',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    },
+                    color: '#333',
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
+            }
+        }
     });
 
     new Chart(document.getElementById('performanceBarChart'), {
         type: 'bar',
         data: performanceData,
         options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Athlete Performance Metrics',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    },
+                    color: '#333',
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true
@@ -86,7 +145,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     new Chart(document.getElementById('trainingPieChart'), {
         type: 'pie',
-        data: trainingData
+        data: trainingData,
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Training Metrics Distribution',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    },
+                    color: '#333',
+                    padding: {
+                        top: 10,
+                        bottom: 20
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
+            }
+        }
     });
 
      //Dummy Athlete Profiles (Replace with real data)
