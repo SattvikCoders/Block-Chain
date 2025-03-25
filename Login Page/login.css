@@ -195,6 +195,21 @@ form{ width: 100%; }
         box-shadow: none;
     }
 
+.back-btn {
+    position: fixed; /* Ensure it's always visible */
+    top: 10px;
+    left: 10px;
+    background: none; /* Remove any background */
+    color: #333;
+    border: none;
+    padding: 0; /* Remove padding to avoid extra space */
+    font-size: 16px; /* Keep font size for visibility */
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline */
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
 @media screen and (max-width: 650px){
     .container{ height: calc(100vh - 40px); }
 
