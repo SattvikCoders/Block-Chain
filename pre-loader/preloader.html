@@ -6,598 +6,675 @@
     <title>Blockchain Athlete Management System</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        body {
-            overflow: hidden;
-            background-color: #f0f4c3; /* Match home page background */
-            color: #333; /* Adjust text color for better contrast */
-        }
+body {
+    overflow: hidden;
+    background-color: #f0f4c3; /* Match home page background */
+    color: #333; /* Adjust text color for better contrast */
+}
 
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
-        .progress-container {
-            width: 80%;
-            max-width: 500px;
-            margin-top: 30px;
-            position: relative;
-        }
+.progress-container {
+    width: 80%;
+    max-width: 500px;
+    margin-top: 30px;
+    position: relative;
+}
 
-        .progress-bar {
-            height: 4px;
-            background: linear-gradient(90deg, #ffc107, #00897b); /* Match theme colors */
-            width: 0%;
-            border-radius: 2px;
-            transition: width 0.5s ease;
-            box-shadow: 0 0 10px rgba(0, 137, 123, 0.5); /* Adjust shadow color */
-        }
+.progress-bar {
+    height: 4px;
+    background: linear-gradient(90deg, #ffc107, #00897b); /* Match theme colors */
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px rgba(0, 137, 123, 0.5); /* Adjust shadow color */
+}
 
-        .progress-text {
-            position: absolute;
-            right: 0;
-            top: -25px;
-            font-size: 14px;
-            color: #00897b; /* Match theme */
-        }
+.progress-text {
+    position: absolute;
+    right: 0;
+    top: -25px;
+    font-size: 14px;
+    color: #00897b; /* Match theme */
+}
 
-        .slider-container {
-            position: relative;
-            width: 90%;
-            max-width: 800px;
-            height: 300px;
-            margin: 0 auto;
-            overflow: hidden;
-            border-radius: 8px;
-            /* Background removed */
-        }
+.slider-container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    height: 300px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 8px;
+}
 
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            /* Background gradient removed */
-        }
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
 
-        .slide.active {
-            opacity: 1;
-        }
+.slide.active {
+    opacity: 1;
+}
 
-        .slide-title {
-            color: #00897b; /* Match theme */
-            margin-bottom: 10px;
-            font-size: 24px;
-            font-weight: 600;
-        }
+.slide-title {
+    color: #00897b; /* Match theme */
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
 
-        .slide-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            width: 100%;
-            position: relative;
-        }
+.slide-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+    width: 100%;
+    position: relative;
+}
 
-        .slide-description {
-            margin-top: 15px;
-            font-size: 16px;
-            color: #555; /* Adjust for better readability */
-            max-width: 80%;
-        }
+.slide-description {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #555; /* Adjust for better readability */
+    max-width: 80%;
+}
 
-        .logo {
-            margin-bottom: 20px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-        }
+.logo {
+    margin-bottom: 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
 
-        .logo svg {
-            height: 100%;
-            width: auto;
-        }
+.logo svg {
+    height: 100%;
+    width: auto;
+}
 
-        .dots-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
+.dots-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            margin: 0 5px;
-            border-radius: 50%;
-            background-color: #b2dfdb; /* Match theme */
-            opacity: 0.5;
-            transition: all 0.3s ease;
-        }
+.dot {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-color: #b2dfdb; /* Match theme */
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
 
-        .dot.active {
-            opacity: 1;
-            background-color: #00897b; /* Match theme */
-            transform: scale(1.2);
-        }
+.dot.active {
+    opacity: 1;
+    background-color: #00897b; /* Match theme */
+    transform: scale(1.2);
+}
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .slider-container {
-                height: 250px;
-            }
-            .slide-title {
-                font-size: 20px;
-            }
-            .slide-description {
-                font-size: 14px;
-            }
-            .logo {
-                height: 50px;
-            }
-        }
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .slider-container {
+        height: 250px;
+    }
 
-        @media (max-width: 480px) {
-            .slider-container {
-                height: 220px;
-            }
-            .slide-title {
-                font-size: 18px;
-            }
-            .slide-description {
-                font-size: 12px;
-                max-width: 95%;
-            }
-            .logo {
-                height: 40px;
-            }
-        }
+    .slide-title {
+        font-size: 20px;
+    }
 
-        /* Animation Classes */
-        .animate-block {
-            animation: float 3s infinite ease-in-out;
-        }
+    .slide-description {
+        font-size: 14px;
+    }
 
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
-        }
+    .logo {
+        height: 50px;
+    }
+}
 
-        /* Specific slide animations */
-        
-        /* Slide 1 - Registration */
-        .registration-container {
-            width: 200px;
-            height: 180px;
-            position: relative;
-        }
-        
-        .digital-profile {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
-            background-color: #172a45;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: zoomIn 3s infinite;
-        }
-        
-        @keyframes zoomIn {
-            0% { transform: translate(-50%, -50%) scale(0.9); }
-            50% { transform: translate(-50%, -50%) scale(1.1); }
-            100% { transform: translate(-50%, -50%) scale(0.9); }
-        }
-        
-        .blockchain-ledger {
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        .ledger-block {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: rgba(100, 255, 218, 0.2);
-            border: 1px solid #64ffda;
-            border-radius: 4px;
-        }
-        
-        /* Slide 2 - Performance */
-        .performance-container {
-            width: 200px;
-            height: 180px;
-            position: relative;
-        }
-        
-        .chart-container {
-            width: 180px;
-            height: 100px;
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-        }
-        
-        .chart-bar {
-            width: 8px;
-            background-color: #64ffda;
-            margin: 0 3px;
-            border-radius: 4px 4px 0 0;
-            animation: chartGrow 2s infinite;
-        }
-        
-        @keyframes chartGrow {
-            0% { height: 20%; }
-            50% { height: 80%; }
-            100% { height: 20%; }
-        }
-        
-        .athlete-silhouette {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 60px;
-            background-color: #64ffda;
-            mask-position: center;
-            mask-repeat: no-repeat;
-            mask-size: contain;
-            animation: run 1s infinite alternate;
-        }
-        
-        @keyframes run {
-            0% { transform: translateX(-50%) skewX(5deg); }
-            100% { transform: translateX(-50%) skewX(-5deg); }
-        }
-        
-        /* Slide 3 - Smart Contracts */
-        .contracts-container {
-            width: 200px;
-            height: 180px;
-            position: relative;
-        }
-        
-        .contract-paper {
-            position: absolute;
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 80px;
-            background-color: white;
-            border-radius: 4px;
-        }
-        
-        .signature {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 20px;
-            background-color: #64ffda;
-            animation: sign 3s infinite;
-        }
-        
-        @keyframes sign {
-            0% { width: 0; opacity: 1; }
-            50% { width: 60px; opacity: 1; }
-            60% { opacity: 0.8; }
-            100% { opacity: 1; }
-        }
-        
-        .token-container {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 160px;
-            height: 40px;
-        }
-        
-        .token {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #f1c40f;
-            border-radius: 50%;
-            animation: moveToken 3s infinite;
-        }
-        
-        @keyframes moveToken {
-            0% { left: 0; top: 0; }
-            50% { left: 100%; top: 0; }
-            100% { left: 0; top: 0; }
-        }
-        
-        /* Slide 4 - Medical Records */
-        .medical-container {
-            width: 200px;
-            height: 180px;
-            position: relative;
-            perspective: 1000px;
-        }
-        
-        .medical-report {
-            position: absolute;
-            width: 120px;
-            height: 150px;
-            background-color: white;
-            border-radius: 4px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: flipReport 6s infinite;
-        }
-        
-        @keyframes flipReport {
-            0% { transform: translate(-50%, -50%) rotateY(0); }
-            25% { transform: translate(-50%, -50%) rotateY(180deg); }
-            50% { transform: translate(-50%, -50%) rotateY(360deg); }
-            75% { transform: translate(-50%, -50%) rotateY(540deg); }
-            100% { transform: translate(-50%, -50%) rotateY(720deg); }
-        }
-        
-        .secure-icon {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            top: 10px;
-            right: 10px;
-            background-color: #64ffda;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        /* Slide 5 - Legacy */
-        .legacy-container {
-            width: 200px;
-            height: 180px;
-            position: relative;
-        }
-        
-        .trophy {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px;
-            height: 120px;
-            animation: glowTrophy 3s infinite;
-            filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.8)); /* Adjust glow to match yellow theme */
-        }
-        
-        @keyframes glowTrophy {
-            0% { filter: drop-shadow(0 0 5px rgba(241, 196, 15, 0.5)); }
-            50% { filter: drop-shadow(0 0 20px rgba(241, 196, 15, 1)); }
-            100% { filter: drop-shadow(0 0 5px rgba(241, 196, 15, 0.5)); }
-        }
-        
-        .record-blocks {
-            position: absolute;
-            width: 200px;
-            height: 50px;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .record-block {
-            width: 30px;
-            height: 40px;
-            margin: 0 5px;
-            background: linear-gradient(135deg, #ffc107, #00897b); /* Match theme colors */
-            border: 2px solid #00897b; /* Match theme */
-            border-radius: 6px;
-            animation: fadeInOut 2s infinite alternate;
-            box-shadow: 0 4px 10px rgba(100, 255, 218, 0.5);
-        }
-        
-        @keyframes fadeInOut {
-            0% { opacity: 0.7; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
+@media (max-width: 480px) {
+    .slider-container {
+        height: 220px;
+    }
 
-        /* Enlarge and enhance the Athlete Chain text */
-        .athlete-chain-text {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #00897b; /* Match the green theme */
-            text-align: center;
-            margin-bottom: 30px;
-            animation: fadeInScale 2s infinite alternate;
-        }
+    .slide-title {
+        font-size: 18px;
+    }
 
-        @keyframes fadeInScale {
-            0% { opacity: 0.7; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.1); }
-        }
+    .slide-description {
+        font-size: 12px;
+        max-width: 95%;
+    }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .athlete-chain-text {
-                font-size: 2.5rem;
-            }
-            .trophy {
-                width: 80px;
-                height: 100px;
-            }
-            .record-block {
-                width: 25px;
-                height: 35px;
-            }
-        }
+    .logo {
+        height: 40px;
+    }
+}
 
-        @media (max-width: 480px) {
-            .athlete-chain-text {
-                font-size: 2rem;
-            }
-            .trophy {
-                width: 70px;
-                height: 90px;
-            }
-            .record-block {
-                width: 20px;
-                height: 30px;
-            }
-        }
+/* Animation Classes */
+.animate-block {
+    animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Specific slide animations */
+
+/* Slide 1 - Registration */
+.registration-container {
+    width: 200px;
+    height: 180px;
+    position: relative;
+}
+
+.digital-profile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background-color: #172a45;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: zoomIn 3s infinite;
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+}
+
+.blockchain-ledger {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ledger-block {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgba(100, 255, 218, 0.2);
+    border: 1px solid #64ffda;
+    border-radius: 4px;
+}
+
+/* Slide 2 - Performance */
+.performance-container {
+    width: 200px;
+    height: 180px;
+    position: relative;
+}
+
+.chart-container {
+    width: 180px;
+    height: 100px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.chart-bar {
+    width: 8px;
+    background-color: #64ffda;
+    margin: 0 3px;
+    border-radius: 4px 4px 0 0;
+    animation: chartGrow 2s infinite;
+}
+
+@keyframes chartGrow {
+    0% {
+        height: 20%;
+    }
+
+    50% {
+        height: 80%;
+    }
+
+    100% {
+        height: 20%;
+    }
+}
+
+.athlete-silhouette {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 60px;
+    background-color: #64ffda;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    animation: run 1s infinite alternate;
+}
+
+@keyframes run {
+    0% {
+        transform: translateX(-50%) skewX(5deg);
+    }
+
+    100% {
+        transform: translateX(-50%) skewX(-5deg);
+    }
+}
+
+/* Slide 3 - Smart Contracts */
+.contracts-container {
+    width: 200px;
+    height: 180px;
+    position: relative;
+}
+
+.contract-paper {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 80px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.signature {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 20px;
+    background-color: #64ffda;
+    animation: sign 3s infinite;
+}
+
+@keyframes sign {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+
+    50% {
+        width: 60px;
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.token-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 40px;
+}
+
+.token {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #f1c40f;
+    border-radius: 50%;
+    animation: moveToken 3s infinite;
+}
+
+@keyframes moveToken {
+    0% {
+        left: 0;
+        top: 0;
+    }
+
+    50% {
+        left: 100%;
+        top: 0;
+    }
+
+    100% {
+        left: 0;
+        top: 0;
+    }
+}
+
+/* Slide 4 - Medical Records */
+.medical-container {
+    width: 200px;
+    height: 180px;
+    position: relative;
+    perspective: 1000px;
+}
+
+.medical-report {
+    position: absolute;
+    width: 120px;
+    height: 150px;
+    background-color: white;
+    border-radius: 4px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: flipReport 6s infinite;
+}
+
+@keyframes flipReport {
+    0% {
+        transform: translate(-50%, -50%) rotateY(0);
+    }
+
+    25% {
+        transform: translate(-50%, -50%) rotateY(180deg);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) rotateY(360deg);
+    }
+
+    75% {
+        transform: translate(-50%, -50%) rotateY(540deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotateY(720deg);
+    }
+}
+
+.secure-icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 10px;
+    right: 10px;
+    background-color: #64ffda;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Slide 5 - Legacy */
+.legacy-container {
+    width: 200px;
+    height: 180px;
+    position: relative;
+}
+
+.trophy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 120px;
+    animation: glowTrophy 3s infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.8)); /* Adjust glow to match yellow theme */
+}
+
+@keyframes glowTrophy {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(241, 196, 15, 0.5));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 20px rgba(241, 196, 15, 1));
+    }
+
+    100% {
+        filter: drop-shadow(0 0 5px rgba(241, 196, 15, 0.5));
+    }
+}
+
+.record-blocks {
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+}
+
+.record-block {
+    width: 30px;
+    height: 40px;
+    margin: 0 5px;
+    background: linear-gradient(135deg, #ffc107, #00897b); /* Match theme colors */
+    border: 2px solid #00897b; /* Match theme */
+    border-radius: 6px;
+    animation: fadeInOut 2s infinite alternate;
+    box-shadow: 0 4px 10px rgba(100, 255, 218, 0.5);
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Enlarge and enhance the Athlete Chain text */
+.athlete-chain-text {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #00897b; /* Match the green theme */
+    text-align: center;
+    margin-bottom: 30px;
+    animation: fadeInScale 2s infinite alternate;
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .athlete-chain-text {
+        font-size: 2.5rem;
+    }
+
+    .trophy {
+        width: 80px;
+        height: 100px;
+    }
+
+    .record-block {
+        width: 25px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .athlete-chain-text {
+        font-size: 2rem;
+    }
+
+    .trophy {
+        width: 70px;
+        height: 90px;
+    }
+
+    .record-block {
+        width: 20px;
+        height: 30px;
+    }
+}
+
     </style>
 </head>
 <body>
     <div class="preloader">
-        <!-- Removed the logo -->
         <div class="athlete-chain-text">ATHLETE CHAIN</div>
 
         <div class="slider-container">
-            <!-- Slide 1 - Registration -->
             <div class="slide active" id="slide1">
                 <h2 class="slide-title">Athlete Registration</h2>
                 <div class="slide-content">
                     <div class="registration-container">
                         <div class="blockchain-ledger" id="ledger">
-                            <!-- Blocks generated by JS -->
                         </div>
                         <div class="digital-profile">
-                            <svg viewBox="0 0 24 24" width="50" height="50" stroke="#64ffda" stroke-width="1.5" fill="none">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                            </svg>
+                            <img src="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' width='50' height='50' stroke='%2364ffda' stroke-width='1.5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E" alt="Digital Profile" />
                         </div>
                     </div>
                 </div>
                 <p class="slide-description">Securely register athletes with immutable blockchain records</p>
             </div>
-            
-            <!-- Slide 2 - Performance Tracking -->
+
             <div class="slide" id="slide2">
                 <h2 class="slide-title">Performance Tracking</h2>
                 <div class="slide-content">
                     <div class="performance-container">
                         <div class="chart-container" id="chart">
-                            <!-- Bars generated by JS -->
                         </div>
                         <div class="athlete-silhouette">
-                            <svg viewBox="0 0 24 24" width="40" height="60" stroke="#0a192f" stroke-width="1.5" fill="#0a192f">
-                                <path d="M13.5,5.5c1.1,0,2-0.9,2-2s-0.9-2-2-2s-2,0.9-2,2S12.4,5.5,13.5,5.5z M17.5,10.78c-1.23-0.37-2.22-1.17-2.8-2.18
-                                l-1-1.6c-0.41-0.65-1.11-1-1.84-1c-0.78,0-1.59,0.5-1.78,1.44S7,23,7,23h2.1l1.8-8l2.1,2v6h2v-7.5l-2.1-2l0.6-3c1,1.15,2.41,2.01,4,2.34V23h2V9h-1.5C18,9,18,9.34,17.5,10.78z"/>
-                            </svg>
+                            <img src="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' width='40' height='60' stroke='%230a192f' stroke-width='1.5' fill='%230a192f' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.5,5.5c1.1,0,2-0.9,2-2s-0.9-2-2-2s-2,0.9-2,2S12.4,5.5,13.5,5.5z M17.5,10.78c-1.23-0.37-2.22-1.17-2.8-2.18 l-1-1.6c-0.41-0.65-1.11-1-1.84-1c-0.78,0-1.59,0.5-1.78,1.44S7,23,7,23h2.1l1.8-8l2.1,2v6h2v-7.5l-2.1-2l0.6-3c1,1.15,2.41,2.01,4,2.34V23h2V9h-1.5C18,9,18,9.34,17.5,10.78z'/%3E%3C/svg%3E" alt="Athlete Silhouette" />
                         </div>
                     </div>
                 </div>
                 <p class="slide-description">Real-time analytics and performance monitoring</p>
             </div>
-            
-            <!-- Slide 3 - Smart Contracts -->
+
             <div class="slide" id="slide3">
                 <h2 class="slide-title">Smart Contracts</h2>
                 <div class="slide-content">
                     <div class="contracts-container">
                         <div class="contract-paper">
-                            <svg viewBox="0 0 120 80" width="120" height="80">
-                                <rect x="10" y="15" width="100" height="10" fill="#8892b0" opacity="0.3"/>
-                                <rect x="10" y="35" width="100" height="10" fill="#8892b0" opacity="0.3"/>
-                                <rect x="10" y="55" width="50" height="10" fill="#8892b0" opacity="0.3"/>
-                            </svg>
+                            <img src="data:image/svg+xml,%3Csvg viewBox='0 0 120 80' width='120' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='10' y='15' width='100' height='10' fill='%238892b0' opacity='0.3'/%3E%3Crect x='10' y='35' width='100' height='10' fill='%238892b0' opacity='0.3'/%3E%3Crect x='10' y='55' width='50' height='10' fill='%238892b0' opacity='0.3'/%3E%3C/svg%3E" alt="Contract Paper" />
                             <div class="signature"></div>
                         </div>
                         <div class="token-container" id="tokens">
-                            <!-- Tokens generated by JS -->
                         </div>
                     </div>
                 </div>
                 <p class="slide-description">Secure and transparent sponsorship contracts</p>
             </div>
-            
-            <!-- Slide 4 - Medical Records -->
+
             <div class="slide" id="slide4">
                 <h2 class="slide-title">Medical & Injury Records</h2>
                 <div class="slide-content">
                     <div class="medical-container">
                         <div class="medical-report">
-                            <svg viewBox="0 0 120 150" width="120" height="150">
-                                <rect x="10" y="20" width="100" height="10" fill="#8892b0" opacity="0.3"/>
-                                <rect x="10" y="40" width="100" height="10" fill="#8892b0" opacity="0.3"/>
-                                <rect x="10" y="60" width="100" height="10" fill="#8892b0" opacity="0.3"/>
-                                <rect x="10" y="80" width="50" height="10" fill="#8892b0" opacity="0.3"/>
-                                <rect x="10" y="100" width="80" height="30" fill="#8892b0" opacity="0.1"/>
-                            </svg>
+                            <img src="data:image/svg+xml,%3Csvg viewBox='0 0 120 150' width='120' height='150' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='10' y='20' width='100' height='10' fill='%238892b0' opacity='0.3'/%3E%3Crect x='10' y='40' width='100' height='10' fill='%238892b0' opacity='0.3'/%3E%3Crect x='10' y='60' width='100' height='10' fill='%238892b0' opacity='0.3'/%3E%3Crect x='10' y='80' width='50' height='10' fill='%238892b0' opacity='0.3'/%3E%3Crect x='10' y='100' width='80' height='30' fill='%238892b0' opacity='0.1'/%3E%3C/svg%3E" alt="Medical Report" />
                         </div>
                         <div class="secure-icon">
-                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="#0a192f" stroke-width="2" fill="none">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                            </svg>
+                            <img src="data:image/svg+xml,%3Csvg viewBox='0 0 24 24' width='20' height='20' stroke='%230a192f' stroke-width='2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='3' y='11' width='18' height='11' rx='2' ry='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E" alt="Secure Icon" />
                         </div>
                     </div>
                 </div>
                 <p class="slide-description">Secure and private health data management</p>
             </div>
-            
-            <!-- Slide 5 - Legacy -->
+
             <div class="slide" id="slide5">
                 <h2 class="slide-title">Retirement & Legacy</h2>
                 <div class="slide-content">
                     <div class="legacy-container">
                         <div class="trophy">
-                            <svg viewBox="0 0 80 100" width="80" height="100" stroke="#f1c40f" stroke-width="2" fill="#f1c40f">
-                                <path d="M20,20 L20,5 L60,5 L60,20 C60,40 70,45 75,50 L60,50 C55,50 55,45 50,40 L30,40 C25,45 25,50 20,50 L5,50 C10,45 20,40 20,20 Z" />
-                                <rect x="35" y="50" width="10" height="30" />
-                                <rect x="25" y="80" width="30" height="5" />
-                            </svg>
+                            <img src="data:image/svg+xml,%3Csvg viewBox='0 0 80 100' width='80' height='100' stroke='%23f1c40f' stroke-width='2' fill='%23f1c40f' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20,20 L20,5 L60,5 L60,20 C60,40 70,45 75,50 L60,50 C55,50 55,45 50,40 L30,40 C25,45 25,50 20,50 L5,50 C10,45 20,40 20,20 Z'/%3E%3Crect x='35' y='50' width='10' height='30'/%3E%3Crect x='25' y='80' width='30' height='5'/%3E%3C/svg%3E" alt="Trophy" />
                         </div>
                         <div class="record-blocks" id="records">
-                            <!-- Records generated by JS -->
                         </div>
                     </div>
                 </div>
                 <p class="slide-description">Preserving athlete achievements for generations</p>
             </div>
         </div>
-        
+
         <div class="dots-container">
             <div class="dot active" data-slide="1"></div>
             <div class="dot" data-slide="2"></div>
@@ -605,141 +682,137 @@
             <div class="dot" data-slide="4"></div>
             <div class="dot" data-slide="5"></div>
         </div>
-        
+
         <div class="progress-container">
             <div class="progress-bar"></div>
-            <div class="progress-text">0%</</div>
+            <div class="progress-text">0%</div>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize dynamic elements
-            createLedgerBlocks();
-            createChartBars();
-            createTokens();
-            createRecordBlocks();
-            
-            // Progress bar animation
-            let progress = 0;
-            const progressBar = document.querySelector('.progress-bar');
-            const progressText = document.querySelector('.progress-text');
-            
-            const progressInterval = setInterval(() => {
-                progress += 1;
-                progressBar.style.width = `${progress}%`;
-                progressText.textContent = `${progress}%`;
-                
-                if (progress >= 100) {
-                    clearInterval(progressInterval);
-                    setTimeout(() => {
-                        // You would typically redirect or hide the preloader here
-                        // For demo purposes, we'll just restart the animation
-                        progress = 0;
-                        progressBar.style.width = '0%';
-                        progressText.textContent = '0%';
-                        startProgress();
-                    }, 1000);
-                }
-            }, 50);
-            
-            function startProgress() {
-                progress = 0;
-                const progressInterval = setInterval(() => {
-                    progress += 1;
-                    progressBar.style.width = `${progress}%`;
-                    progressText.textContent = `${progress}%`;
-                    
-                    if (progress >= 100) {
-                        clearInterval(progressInterval);
-                    }
-                }, 50);
-            }
-            
-            // Slider functionality
-            let currentSlide = 1;
-            const slides = document.querySelectorAll('.slide');
-            const dots = document.querySelectorAll('.dot');
-            
-            function changeSlide() {
-                document.querySelector(`.slide.active`).classList.remove('active');
-                document.querySelector(`.dot.active`).classList.remove('active');
-                
-                currentSlide = currentSlide % 5 + 1;
-                
-                document.querySelector(`#slide${currentSlide}`).classList.add('active');
-                document.querySelector(`.dot[data-slide="${currentSlide}"]`).classList.add('active');
-            }
-            
-            setInterval(changeSlide, 5000);
-            
-            // Click on dots to change slides
-            dots.forEach(dot => {
-                dot.addEventListener('click', function() {
-                    const slideNumber = parseInt(this.getAttribute('data-slide'));
-                    document.querySelector(`.slide.active`).classList.remove('active');
-                    document.querySelector(`.dot.active`).classList.remove('active');
-                    
-                    document.querySelector(`#slide${slideNumber}`).classList.add('active');
-                    this.classList.add('active');
-                    
-                    currentSlide = slideNumber;
-                });
-            });
-            
-            // Dynamic element creation functions
-            function createLedgerBlocks() {
-                const ledger = document.getElementById('ledger');
-                const positions = [
-                    {top: '20%', left: '20%', delay: '0s'},
-                    {top: '20%', left: '60%', delay: '0.5s'},
-                    {top: '60%', left: '20%', delay: '1s'},
-                    {top: '60%', left: '60%', delay: '1.5s'}
-                ];
-                
-                positions.forEach((pos, i) => {
-                    const block = document.createElement('div');
-                    block.className = 'ledger-block';
-                    block.style.top = pos.top;
-                    block.style.left = pos.left;
-                    block.style.animation = `float 3s infinite ease-in-out ${pos.delay}`;
-                    ledger.appendChild(block);
-                });
-            }
-            
-            function createChartBars() {
-                const chart = document.getElementById('chart');
-                const heights = [30, 50, 70, 40, 60, 80, 45];
-                
-                heights.forEach((height, i) => {
-                    const bar = document.createElement('div');
-                    bar.className = 'chart-bar';
-                    bar.style.height = `${height}%`;
-                    bar.style.animationDelay = `${i * 0.2}s`;
-                    chart.appendChild(bar);
-                });
-            }
-            
-            function createTokens() {
-                const tokenContainer = document.getElementById('tokens');
-                for (let i = 0; i < 3; i++) {
-                    const token = document.createElement('div');
-                    token.className = 'token';
-                    token.style.animationDelay = `${i * 0.5}s`;
-                    tokenContainer.appendChild(token);
-                }
-            }
-            
-            function createRecordBlocks() {
-                const recordsContainer = document.getElementById('records');
-                for (let i = 0; i < 5; i++) {
-                    const record = document.createElement('div');
-                    record.className = 'record-block';
-                    record.style.animationDelay = `${i * 0.2}s`;
-                    recordsContainer.appendChild(record);
-                }
-            }
-        });
-    </script>
+
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Initialize dynamic elements
+    createLedgerBlocks();
+    createChartBars();
+    createTokens();
+    createRecordBlocks();
+
+    // Progress bar animation
+    let progress = 0;
+    const progressBar = document.querySelector('.progress-bar');
+    const progressText = document.querySelector('.progress-text');
+
+    const progressInterval = setInterval(() => {
+        progress += 1;
+        progressBar.style.width = progress + '%';
+        progressText.textContent = progress + '%';
+
+        if (progress >= 100) {
+            clearInterval(progressInterval);
+            setTimeout(() => {
+                window.location.href = "../index.html"; // Redirect to the main page
+            }, 500); // Wait for fade-out animation
+        }
+    }, 30); // Adjust the speed of the progress bar
+
+    function startProgress() {
+        progress = 0;
+        const progressInterval = setInterval(() => {
+            progress += 1;
+            progressBar.style.width = progress + '%';
+            progressText.textContent = progress + '%';
+
+            if (progress >= 100) {
+                clearInterval(progressInterval);
+            }
+        }, 50);
+    }
+
+    // Slider functionality
+    let currentSlide = 1;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function changeSlide() {
+        document.querySelector('.slide.active').classList.remove('active');
+        document.querySelector('.dot.active').classList.remove('active');
+
+        currentSlide = currentSlide % 5 + 1;
+
+        document.querySelector(`#slide${currentSlide}`).classList.add('active');
+        document.querySelector(`.dot[data-slide="${currentSlide}"]`).classList.add('active');
+    }
+
+    setInterval(changeSlide, 5000);
+
+    // Click on dots to change slides
+    dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            const slideNumber = parseInt(this.getAttribute('data-slide'));
+            document.querySelector('.slide.active').classList.remove('active');
+            document.querySelector('.dot.active').classList.remove('active');
+
+            document.querySelector(`#slide${slideNumber}`).classList.add('active');
+            this.classList.add('active');
+
+            currentSlide = slideNumber;
+        });
+    });
+
+    // Dynamic element creation functions
+    function createLedgerBlocks() {
+        const ledger = document.getElementById('ledger');
+        const positions = [
+            {top: '20%', left: '20%', delay: '0s'},
+            {top: '20%', left: '60%', delay: '0.5s'},
+            {top: '60%', left: '20%', delay: '1s'},
+            {top: '60%', left: '60%', delay: '1.5s'}
+        ];
+
+        positions.forEach((pos, i) => {
+            const block = document.createElement('div');
+            block.className = 'ledger-block';
+            block.style.top = pos.top;
+            block.style.left = pos.left;
+            block.style.animation = `float 3s infinite ease-in-out ${pos.delay}`;
+            ledger.appendChild(block);
+        });
+    }
+
+    function createChartBars() {
+        const chart = document.getElementById('chart');
+        const heights = [30, 50, 70, 40, 60, 80, 45];
+
+        heights.forEach((height, i) => {
+            const bar = document.createElement('div');
+            bar.className = 'chart-bar';
+            bar.style.height = height + '%';
+            bar.style.animationDelay = i * 0.2 + 's';
+            chart.appendChild(bar);
+        });
+    }
+
+    function createTokens() {
+        const tokenContainer = document.getElementById('tokens');
+        for (let i = 0; i < 3; i++) {
+            const token = document.createElement('div');
+            token.className = 'token';
+            token.style.animationDelay = i * 0.5 + 's';
+            tokenContainer.appendChild(token);
+        }
+    }
+
+    function createRecordBlocks() {
+        const recordsContainer = document.getElementById('records');
+        for (let i = 0; i < 5; i++) {
+            const record = document.createElement('div');
+            record.className = 'record-block';
+            record.style.animationDelay = i * 0.2 + 's';
+            recordsContainer.appendChild(record);
+        }
+    }
+});
+</script>
 </html>

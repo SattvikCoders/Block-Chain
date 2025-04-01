@@ -11,7 +11,17 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
+    <script>
+        // Redirect to the preloader page if not coming from it
+        if (!sessionStorage.getItem('preloaderShown')) {
+            sessionStorage.setItem('preloaderShown', 'true');
+            window.location.href = "pre-loader/preloader.html";
+        }
+    </script>
+   
+   
+    
+   <style>
         /* Preloader Styles */
         body {
             overflow: hidden;
@@ -188,35 +198,6 @@
         </div>
     </footer>
 
-    <script>
-        // Preloader Script
-        document.addEventListener('DOMContentLoaded', function () {
-            const preloader = document.querySelector('.preloader');
-            const progressBar = document.querySelector('.progress-bar');
-            const progressText = document.querySelector('.progress-text');
-            let progress = 0;
-
-            // Progress bar animation
-            const interval = setInterval(() => {
-                progress += 1;
-                progressBar.style.width = `${progress}%`;
-                progressText.textContent = `${progress}%`;
-
-                if (progress >= 100) {
-                    clearInterval(interval);
-
-                    // Fade out the preloader
-                    preloader.style.transition = 'opacity 0.5s ease';
-                    preloader.style.opacity = '0';
-
-                    setTimeout(() => {
-                        preloader.style.display = 'none'; // Hide the preloader
-                        document.body.style.overflow = 'auto'; // Enable scrolling
-                    }, 500); // Wait for fade-out animation to complete
-                }
-            }, 30); // Adjust the speed of the progress bar
-        });
-    </script>
     <script src="script.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
